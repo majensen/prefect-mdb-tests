@@ -1,0 +1,11 @@
+[project]
+name = "prefect-mdb"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j>=5.28.1",
+    "prefect>=3.4.1",
+    "prefect-aws>=0.5.10",
+]
