@@ -1,4 +1,5 @@
 import json
+import os
 from prefect import flow
 from neo4j import GraphDatabase
 from prefect_aws.secrets_manager import AwsSecret
@@ -9,6 +10,8 @@ def try_put(
         commit: str = 'test',
 ) -> None:
 
+    print(os.getcwd())
+    
     mdb_creds  = AwsSecret.load("mdb-cloud-one-neo4j-creds")
     mdb_creds = json.loads(mdb_creds.read_secret())
     

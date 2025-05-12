@@ -17,12 +17,12 @@ pull:
   
 - prefect.deployments.steps.run_shell_script:
     id: install-dependencies
-    script: sh -c "uv pip install --system . && uv sync
+    script: sh -c "cd {{clone_step.directory}} && uv pip install --system . && uv sync
       --frozen"
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
-- name: try-clom-2
+- name: try-clom-3
   version: null
   tags:
     - TEST
