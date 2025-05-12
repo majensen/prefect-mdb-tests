@@ -23,11 +23,6 @@ pull:
     script: sh -c "uv pip install --system . && uv sync
       --frozen"
 
-- prefect.deployments.steps.pip_install_requirements:
-    requirements_file: pyproject.toml
-    directory: "."
-    stream_output: false
-
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
 - name: try-clom
