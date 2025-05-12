@@ -15,9 +15,6 @@ pull:
     branch: main
     repository: https://github.com/majensen/prefect-mdb-tests.git
   
-- prefect.deployments.steps.set_working_directory:
-    directory: "{{clone_step.directory}}"
-
 - prefect.deployments.steps.run_shell_script:
     id: install-dependencies
     script: sh -c "uv pip install --system . && uv sync
@@ -25,7 +22,7 @@ pull:
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
-- name: try-clom
+- name: try-clom-2
   version: null
   tags:
     - TEST
