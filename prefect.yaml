@@ -11,16 +11,21 @@ push: null
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
 - prefect.deployments.steps.git_clone:
-    id: clone-step
+    id: clone_step
     branch: main
     repository: https://github.com/majensen/prefect-mdb-tests.git
   
 - prefect.deployments.steps.set_working_directory:
-    directory: {{ clone-step.directory }}
+    directory: "{{clone_step.directory}}"
+
+- prefect.deployments.steps.run_shell_script:
+    id: install-dependencies
+    script: sh -c "cd bento-mdb-updates-main && uv pip install --system . && uv sync
+      --frozen"
 
 - prefect.deployments.steps.pip_install_requirements:
     requirements_file: pyproject.toml
-    directory: '{{ clone-step.directory }}'
+    directory: "{{ clone_step.directory }}"
     stream_output: false
 
 # the deployments section allows you to provide configuration for deploying flows
@@ -33,7 +38,7 @@ deployments:
   description: Try interaction with CloudOne MDB
   schedule: {}
   flow_name: null
-  entrypoint: try-clom.py:try_put
+  entrypoint: ./try-clom.py:try_put
   parameters: {}
   work_pool:
     name: mdb-8gb-prefect-2.20.3-python3.9
