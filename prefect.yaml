@@ -25,7 +25,7 @@ pull:
 
 - prefect.deployments.steps.pip_install_requirements:
     requirements_file: pyproject.toml
-    directory: "{{clone_step.directory}}"
+    directory: "."
     stream_output: false
 
 # the deployments section allows you to provide configuration for deploying flows
