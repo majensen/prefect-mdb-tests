@@ -42,5 +42,4 @@ def try_get() -> None:
         'MATCH (n:TEST) RETURN n',
         database_='neo4j',
     )
-    for row in result:
-        print(row)
+    print( [x for x in result] )
