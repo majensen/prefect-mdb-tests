@@ -38,8 +38,8 @@ def try_get() -> None:
                                auth=(mdb_creds['neo4j_user'],
                                      mdb_creds['neo4j_pass']))
     drv.verify_connectivity()
-    result = drv.execute_query(
+    recs, summ, keys = drv.execute_query(
         'MATCH (n:TEST) RETURN n',
         database_='neo4j',
     )
-    print( [x for x in result] )
+    print( [x for x in recs], summ, keys )
