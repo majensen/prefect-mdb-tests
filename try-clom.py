@@ -24,3 +24,22 @@ def try_put(
         database_='neo4j',
         commit=commit
     )
+
+@flow(name="try-get", log_prints=True)
+def try_get() -> None:
+
+    print(os.getcwd())
+    
+    mdb_creds  = AwsSecret.load("mdb-cloud-one-neo4j-creds")
+    mdb_creds = json.loads(mdb_creds.read_secret())
+    
+    drv = GraphDatabase.driver(mdb_creds['neo4j_bolt_uri'],
+                               auth=(mdb_creds['neo4j_user'],
+                                     mdb_creds['neo4j_pass']))
+    drv.verify_connectivity()
+    result = drv.execute_query(
+        'MATCH (n:TEST) RETURN n',
+        database_='neo4j',
+    )
+    for row in result:
+        print(row)
