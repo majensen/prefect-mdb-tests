@@ -19,11 +19,12 @@ def try_put(
                                auth=(mdb_creds['neo4j_user'],
                                      mdb_creds['neo4j_pass']))
     drv.verify_connectivity()
-    drv.execute_query(
+    recs, summ = drv.execute_query(
         'CREATE (n:TEST {_commit: $commit}) RETURN n',
         database_='neo4j',
         commit=commit
     )
+    print([x for x in recs], summ)
 
 @flow(name="try-get", log_prints=True)
 def try_get() -> None:
